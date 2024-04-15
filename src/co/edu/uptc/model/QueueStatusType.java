@@ -2,7 +2,7 @@ package co.edu.uptc.model;
 
 public enum QueueStatusType {
 
-    ATENDIDO("ATENDIDO"), EN_ESPERA("EN ESPERA");
+    ATENDIDO("ATENDIDO"), EN_ESPERA("EN ESPERA"), NO_ATENDIDO("NO ATENDIDO");
 
     public final String queueStatusType;
 
@@ -10,5 +10,5 @@ public enum QueueStatusType {
         this.queueStatusType = queueStatusType;
     }
 
-    
+
 }
