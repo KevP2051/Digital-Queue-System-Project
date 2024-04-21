@@ -1,30 +1,26 @@
 package co.edu.uptc.model;
 
 public class User {
-    private DocumentType documentType;
+    private IdentificationType documentType;
     private String documentNumber;
-    private int waitingToken;
-    private QueueStatusType queueStatusType;
 
-    public User(DocumentType documentType, String documentNumber) {
+
+    public User(IdentificationType documentType, String documentNumber) {
         this.documentType = documentType;
         this.documentNumber = documentNumber;
-        this.queueStatusType = QueueStatusType.EN_ESPERA;
     }
 
-    public void setWaitingToken(int waitingToken){
-        this.waitingToken = waitingToken;
+
+    public IdentificationType getIdentificationType() {
+        return documentType;
     }
 
-    public void setQueueStatusType(QueueStatusType queueStatusType){
-        this.queueStatusType = queueStatusType;
+
+    public String getDocumentNumber() {
+        return documentNumber;
     }
 
-    @Override
-    public String toString() {
-        return "DocumentType: " + documentType + ", DocumentNumber: " + documentNumber + ", waitingToken: "
-                + waitingToken + ", queueStatusType: " + queueStatusType;
-    }
+   
 
     
 }
