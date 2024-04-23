@@ -2,7 +2,7 @@
 ## Descripción
 Este proyecto consiste en un sistema de turnos digitales y su finalidad es analizar el funcionamiento de las colas de la coleccion de java
 ## Pre-requisitos
-- JDK 17
+- JDK 21
 ## Información del proyecto
 ### Versiones.
 Actualmente solo se encuentra disponible una versión del proyecto, que cuenta con funcionalidades y una interfaz de usuario básicas.
