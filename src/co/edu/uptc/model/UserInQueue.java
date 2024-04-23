@@ -18,6 +18,10 @@ public class UserInQueue extends User{
         this.queueStatusType = queueStatusType;
     }
 
+    public int getWaitingToken() {
+        return waitingToken;
+    }
+
     @Override
     public String toString() {
         return "DocumentType: " + getIdentificationType() + ", DocumentNumber: " + getDocumentNumber() + ", waitingToken: "

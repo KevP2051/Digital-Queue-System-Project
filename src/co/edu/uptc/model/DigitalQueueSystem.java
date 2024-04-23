@@ -20,32 +20,32 @@ public class DigitalQueueSystem {
         this.tokenIndex = 0;
     }
 
-    public int assignWaitingToken(UserInQueue userInQueue){ //Este método asigna turnos a los usuarios //METODO PARA USUARIOS NORMALES
+    public int assignWaitingToken(UserInQueue userInQueue){
         tokenIndex++;
         userInQueue.setWaitingToken(tokenIndex);
         usersInQueue.offer(userInQueue);
         return tokenIndex;
     }
 
-    public UserInQueue recoverFirstUserInQueue() throws EmptyQueueException{ //La idea es mostrar siempre qué usuario sigue en la lista de espera, para que todos lo vean al ir a sacar turno. (ESTO EN EL MENÚ)
+    public UserInQueue recoverFirstUserInQueue() throws EmptyQueueException{
         if(usersInQueue.isEmpty()){
             throw new EmptyQueueException();
         }
-        return usersInQueue.peek(); // Este método devuelve al usuario actual en la cola, osea el próximo a pasar.
+        return usersInQueue.peek();
     }
 
     public User changeToNextUserInQueue(QueueStatusType queueStatusType) throws EmptyQueueException{ //Método para usuarios ADMIN
        if(usersInQueue.isEmpty()){
            throw new EmptyQueueException();
        }
-        usersInQueue.peek().setQueueStatusType(queueStatusType); //Esta parte establece el estado del usuario como el que el administrador digite, si fue atendido entonces pasará a atendido y así.
-        if(queueStatusType.equals(QueueStatusType.ATENDIDO)){ //Esta parte del código se usa para añadir a los usuarios a la lista de usuarios atendidos ese día o usuarios no atendidos, dependiendo de lo que haya pulsado el administrador.
+        usersInQueue.peek().setQueueStatusType(queueStatusType);
+        if(queueStatusType.equals(QueueStatusType.ATENDIDO)){
             servedUsers.add(usersInQueue.poll());
         }
-        return recoverFirstUserInQueue(); //Devuelve el nuevo primer usuario en la lista de espera para mostrarlo.
+        return recoverFirstUserInQueue();
     }
 
-    public boolean validateAdminUserLogIn(AdminUser enteredAdminUser){ //METODO PARA VALIDAR QUE EL USUARIO INGRESADO SI SEA ADMIN
+    public boolean validateAdminUserLogIn(AdminUser enteredAdminUser){
        boolean isInformationCorrect = false;
         if(adminUser.getDocumentNumber().equals(enteredAdminUser.getDocumentNumber()) && adminUser.getPassword().equals(enteredAdminUser.getPassword())){
             isInformationCorrect = true;

@@ -1,7 +1,7 @@
 package co.edu.uptc.presenter;
 
 import co.edu.uptc.exceptions.EmptyQueueException;
-import co.edu.uptc.model.DigitalQueueSystem;
+import co.edu.uptc.model.*;
 import co.edu.uptc.view.View;
 
 public class Presenter {
@@ -21,7 +21,8 @@ public class Presenter {
 
         int option = 0;
         do {
-            String menu = "Bienvenido al sistema de asignación de turnos. \nIngresa el número correspondiente al tipo de usuario del que haces parte:\n1.Usuario normal. \n2.Usuario administrativo. ";
+            String menu = "Bienvenido al sistema de asignación de turnos. \nIngresa el número correspondiente al tipo de usuario del que haces parte:" +
+                    "\n1. Usuario administrativo. \n2. Usuario normal. ";
             option = Integer.parseInt(view.readData(menu + "\nDigita la opción a continuación: "));
             switch (option) {
                 case 1:
@@ -41,39 +42,65 @@ public class Presenter {
     }
 
     public void validateAdminUser() {
-        // Código de solicitar datos
-        // if(digitalQueueSystem.validateAdminUserLogIn(//Usuario admin acá){
-        // showAdminMenu();
-        // }
+         if(digitalQueueSystem.validateAdminUserLogIn(new AdminUser(validateID(),
+                 view.readData("Ingrese el numero de documento: "), view.readData("Ingrese su contraseña: ")))){
+         showAdminMenu();
+         }else {
+             view.showMessage("USUARIO O CONTRASEÑA INCORRECTAS");
+         }
     }
 
-    public void showUserMenu() { // Menú para métodos de usuarios.
+    public IdentificationType validateID(){
+        IdentificationType identificationType = IdentificationType.CEDULA;
+        int option = 0;
+        do {
+            String menu = "Ingrese en numero que corresponda a su tipo de documento \n1. CC\n2. TI";
+            option = Integer.parseInt(view.readData(menu + "\nDigita la opción a continuación: "));
+            switch (option) {
+                case 1:
+                    identificationType = IdentificationType.CEDULA;
+                    break;
+                case 2:
+                    identificationType = IdentificationType.TARJETA_DE_IDENTIDAD;
+                    break;
+                default:
+                    view.showMessage("Opción inválida");
+                    break;
+            }
+            break;
+        } while (option != 2);
+        return identificationType;
+    }
+
+    public void showUserMenu() {
         int option = 0;
 
         String menu = "Bienvenido al sistema de asignación de turnos.  \nEl turno actual es: ";
         do {
             try {
-                menu += digitalQueueSystem.recoverFirstUserInQueue();
+                menu += digitalQueueSystem.recoverFirstUserInQueue().getWaitingToken();
             } catch (EmptyQueueException e) {
                 menu += "NINGUNO";
             }
 
-            option = Integer.parseInt(view.readData(menu + "\nDigita la opción a continuación: "));
+            option = Integer.parseInt(view.readData(menu + "\n1. Solicitar turno\nDigita la opción a continuación: "));
             switch (option) {
                 case 1:
-                    validateAdminUser();
-                    break;
-
-                case 2:
-                    showUserMenu(); // Esto podría causar problemas de recursión infinita si no se controla
-                                    // adecuadamente.
+                    assignWaitingToken();
                     break;
 
                 default:
                     view.showMessage("Opción inválida");
                     break;
             }
+            break;
         } while (option != 4);
+    }
+
+    public void assignWaitingToken(){
+        view.showMessage("Se le asigno el turno numero: " + digitalQueueSystem.assignWaitingToken(new UserInQueue(
+                validateID(), view.readData("Ingrese su numero de documento: ")
+        )));
     }
 
     public void showAdminMenu() {
@@ -82,19 +109,15 @@ public class Presenter {
         String menu = "Bienvenido al sistema de asignación de turnos.  \nEl turno actual es: ";
         do {
             try {
-                menu = menu + digitalQueueSystem.recoverFirstUserInQueue();
+                menu = menu + digitalQueueSystem.recoverFirstUserInQueue().getWaitingToken();
             } catch (EmptyQueueException e) {
                 menu = menu + "NINGUNO";
             }
 
-            option = Integer.parseInt(view.readData(menu + "\nDigita la opción a continuación: "));
+            option = Integer.parseInt(view.readData(menu + "\n1. Pasar al siguiente turno \nDigita la opción a continuación: "));
             switch (option) {
                 case 1:
-                    validateAdminUser();
-                    break;
-
-                case 2:
-                    showUserMenu();
+                    changeToNextUserInQueue();
                     break;
 
                 default:
@@ -103,6 +126,40 @@ public class Presenter {
             }
 
         } while (option != 4);
+    }
+
+    public void changeToNextUserInQueue(){
+        try {
+            User user = digitalQueueSystem.changeToNextUserInQueue(validateQueueStatusType());
+            view.showMessage("El siguiente usuario en ser atendio es: \n" + user.getIdentificationType() + ": " + user.getDocumentNumber());
+        } catch (EmptyQueueException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public QueueStatusType validateQueueStatusType(){
+        QueueStatusType queueStatusType = QueueStatusType.NO_ATENDIDO;
+        int option = 0;
+        do {
+            String menu = "Seleccione el estado del usuario anterior \n1. Atendido\n2. En espera \n3. No atendido";
+            option = Integer.parseInt(view.readData(menu + "\nDigita la opción a continuación: "));
+            switch (option) {
+                case 1:
+                    queueStatusType = QueueStatusType.ATENDIDO;
+                    break;
+                case 2:
+                    queueStatusType = QueueStatusType.EN_ESPERA;
+                    break;
+                case 3:
+                    queueStatusType = QueueStatusType.NO_ATENDIDO;
+                    break;
+                default:
+                    view.showMessage("Opción inválida");
+                    break;
+            }
+            break;
+        } while (option != 2);
+        return queueStatusType;
     }
 
     public static void main(String[] args) {
