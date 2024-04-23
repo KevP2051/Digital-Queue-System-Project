@@ -55,7 +55,7 @@ public class Presenter {
         IdentificationType identificationType = IdentificationType.CEDULA;
         int option = 0;
         do {
-            String menu = "Ingrese en numero que corresponda a su tipo de documento \n1. CC\n2. TI";
+            String menu = "Ingrese en numero que corresponda a su tipo de documento \n1. Cédula de ciudadanía\n2. Tarjeta de identidad";
             option = Integer.parseInt(view.readData(menu + "\nDigita la opción a continuación: "));
             switch (option) {
                 case 1:
