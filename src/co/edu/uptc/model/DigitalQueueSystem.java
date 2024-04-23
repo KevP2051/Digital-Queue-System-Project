@@ -52,4 +52,8 @@ public class DigitalQueueSystem {
     public void setAdminUser(AdminUser adminUser){
         this.adminUser = adminUser;
     }
+
+    public LinkedList<UserInQueue> getUsersInQueue() {
+        return usersInQueue;
+    }
 }
