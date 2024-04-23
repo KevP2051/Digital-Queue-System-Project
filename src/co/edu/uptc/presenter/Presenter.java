@@ -138,7 +138,7 @@ public class Presenter {
             User user = digitalQueueSystem.changeToNextUserInQueue(validateQueueStatusType());
             view.showMessage("El siguiente usuario en ser atendio es: \n" + user.getIdentificationType() + ": " + user.getDocumentNumber());
         } catch (EmptyQueueException e) {
-            throw new RuntimeException(e);
+            view.showMessage(e.getMessage());
         }
     }
 
