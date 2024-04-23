@@ -34,7 +34,7 @@ public class DigitalQueueSystem {
         return usersInQueue.peek();
     }
 
-    public User changeToNextUserInQueue(QueueStatusType queueStatusType) throws EmptyQueueException{ //Método para usuarios ADMIN
+    public User changeToNextUserInQueue(QueueStatusType queueStatusType) throws EmptyQueueException{
        if(usersInQueue.isEmpty()){
            throw new EmptyQueueException();
        }
@@ -53,11 +53,15 @@ public class DigitalQueueSystem {
         return isInformationCorrect;
     }
 
-    public ArrayList<UserInQueue> getServedUsers() { //Devuelve la lista de usuarios que sacaron turno ese día.
-        return servedUsers;
+    public String getServedUsers() {
+        StringBuilder builder = new StringBuilder();
+        for(UserInQueue userInQueue : servedUsers){
+            builder.append(userInQueue.toString() + "\n");
+        }
+        return builder.toString();
     }
 
-    public void restartTokenIndex(){ //Reinicia el índice de turnos.
+    public void restartTokenIndex(){
         tokenIndex = 0;
     }
 }

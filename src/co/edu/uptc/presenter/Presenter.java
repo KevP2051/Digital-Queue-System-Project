@@ -74,15 +74,14 @@ public class Presenter {
 
     public void showUserMenu() {
         int option = 0;
-
         String menu = "Bienvenido al sistema de asignación de turnos.  \nEl turno actual es: ";
         do {
+            String menuAux = "";
             try {
-                menu += digitalQueueSystem.recoverFirstUserInQueue().getWaitingToken();
+                menuAux = menu + digitalQueueSystem.recoverFirstUserInQueue().getWaitingToken();
             } catch (EmptyQueueException e) {
-                menu += "NINGUNO";
+                menuAux = menu + "NINGUNO";
             }
-
             option = Integer.parseInt(view.readData(menu + "\n1. Solicitar turno\nDigita la opción a continuación: "));
             switch (option) {
                 case 1:
@@ -104,27 +103,33 @@ public class Presenter {
     }
 
     public void showAdminMenu() {
-
         int option = 0;
         String menu = "Bienvenido al sistema de asignación de turnos.  \nEl turno actual es: ";
         do {
+            String menuAux = "";
             try {
-                menu = menu + digitalQueueSystem.recoverFirstUserInQueue().getWaitingToken();
+                menuAux = menu + digitalQueueSystem.recoverFirstUserInQueue().getWaitingToken();
             } catch (EmptyQueueException e) {
-                menu = menu + "NINGUNO";
+                menuAux = menu + "NINGUNO";
             }
-
-            option = Integer.parseInt(view.readData(menu + "\n1. Pasar al siguiente turno \nDigita la opción a continuación: "));
+            option = Integer.parseInt(view.readData(menuAux + "\n1. Pasar al siguiente turno \n2. Mostrar Lista de usuarios \n3. Reiniciar el numero de turnos\n4. Volver al menu principal \nDigita la opción a continuación: "));
             switch (option) {
                 case 1:
                     changeToNextUserInQueue();
                     break;
-
+                case 2:
+                    view.showMessage(digitalQueueSystem.getServedUsers());
+                    break;
+                case 3:
+                    digitalQueueSystem.restartTokenIndex();
+                    break;
+                case 4:
+                    showMainMenu();
+                    break;
                 default:
                     view.showMessage("Opción inválida");
                     break;
             }
-
         } while (option != 4);
     }
 
