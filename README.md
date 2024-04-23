@@ -25,14 +25,12 @@ En esta interfaz encontraremos un menu en el cual nos dira cual es el turno actu
 
 #### Interfaz de administrativo
 
+En esta interfaz encontraremos al igual que el anterior un menu que nos dira el turno actual, pero en esta encontraremos 3 opciones la cuales seleccionares marcando el numero al que segun correspondan. Para este caso el 1 sera para pasar al siguiente turno, el 2 para reiniciar el numero de turno y el 3 para regresar al menu principal.
 
 ### Funcionalidades del proyecto.
-Las funcionalidades del proyecto y los métodos de la clase Stack que implementan para llevarse a cabo, son los siguientes:
-- (push) Agregar vehículos a la grúa de transporte, basándose en cómo ésta debería ser cargada de acuerdo a los números de ruta de los vehículos.
-- (push) Mostrar en qué órden se deben cargar los vehículos de acuerdo a su número de ruta.
-- (pop) Entregar el vehículo que se encuentre en ruta y retornar su información.
-- (peek) Mostrar dirección del presente vehículo en ruta de entrega.
-- (search) Mostrar el número de vehículos que se necesitaría entregar para que el que posee una placa en concreto se encuentre en ruta.
+Las funcionalidades del proyecto y los métodos de la clase LinkedList que implementan para llevarse a cabo, son los siguientes:
+- (offer) Crear un nuevo turno.
+- (poll) Pasar al siguiente turno y eliminar el turno que acabo de pasar.
 
 ## Recomendaciones
 - Dado que el programa se encuentra realizado bajo la arquitectura de 3 capas, se sugiere tener precaución a la hora de realizar cambios de diseño en cuanto a vista o propiamente el modelo, debido al alto acoplamiento existente.
