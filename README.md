@@ -12,7 +12,7 @@ El código fuente del proyecto se encuentra escrito en el lenguaje Java, bajo el
 La información se gestiona exclusivamente en memoria, utilizando principalmente la estructura de datos LinkedList de la colección de Java.
 Al ingresar a la aplicación, lo primero que aparecera sera un menu solicitando el tipo de usuario que desea utilizar la aplicacion, en este punto seleccionamos el tipo de uso que le vamos a dar a la aplicacion. 
 
-*Tener en cuenta que por el momento la aplicacion solo posee un usuario administrativo y no existe una funcion para crear mas, entonces cuando se vaya a utilizar esta funcion el sistema nos pedira un tipo de documento, numero de documento y contraseña, para nuestro casa el tipo de documento ser CC, el numero de documento sera 23412035 y la contraseña sera admin123.*
+*Tener en cuenta que por el momento la aplicacion solo posee un usuario administrativo y no existe una funcion para crear mas, entonces cuando se vaya a utilizar esta funcion el sistema nos pedira un tipo de documento, numero de documento y contraseña, para nuestro caso el tipo de documento sera "CC", el numero de documento sera "23412035" y la contraseña sera "admin123".*
 
 *NOTA: Al estar la información siendo manejada únicamente en memoria, el sistema no almacena nada y en cada ejecución se debe cargar con datos.*
 ### Interfaz.
@@ -21,7 +21,7 @@ La interfaz se encuentra desarrollada con ayuda de la librería de Java Swing y 
 
 #### Interfaz de usuario.
 
-En esta interfaz encontraremos un menu en el cual nos dira cual es el turno actual y nos encontraremos con una sola opcion la cual sera "Solicitar turno" la cual seleccionaremos marcando el numero 1 y dandole aceptar. Despues de esto nos pedira unos datos y al final nos asignara el numero de turno que nos corresponde.
+En esta interfaz encontraremos un menu en el cual nos dira cual es el turno actual y nos encontraremos con una sola opcion la cual sera "Solicitar turno" la cual seleccionaremos marcando el numero 1 y dando aceptar. Despues de esto nos pedira unos datos y al final nos asignara el numero de turno que nos corresponde.
 
 #### Interfaz de administrativo
 
