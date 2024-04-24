@@ -1,15 +1,13 @@
 package co.edu.uptc.model;
 
-public class UserInQueue extends User{
+public class UserInQueue extends User {
     private int waitingToken;
-
 
     public UserInQueue(IdentificationType idType, String documentNumber) {
         super(idType, documentNumber);
     }
-    
-    
-    public void setWaitingToken(int waitingToken){
+
+    public void setWaitingToken(int waitingToken) {
         this.waitingToken = waitingToken;
     }
 

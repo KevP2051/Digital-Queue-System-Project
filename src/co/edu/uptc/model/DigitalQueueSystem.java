@@ -49,7 +49,7 @@ public class DigitalQueueSystem {
         tokenIndex = 0;
     }
 
-    public void setAdminUser(AdminUser adminUser){
+    public void setAdminUser(AdminUser adminUser) {
         this.adminUser = adminUser;
     }
 

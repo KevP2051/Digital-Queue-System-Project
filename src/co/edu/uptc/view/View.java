@@ -7,20 +7,18 @@ public class View {
 	public String readData(String message) {
 		boolean inputIsValid = false;
 		String input = "";
-		while(!inputIsValid){
+		while (!inputIsValid) {
 			input = JOptionPane.showInputDialog(message);
-			if(input.isEmpty()){
+			if (input.isEmpty()) {
 				showMessage("El campo no puede estar vacio.");
-			}else{
+			} else {
 				inputIsValid = true;
-				
+
 			}
 		}
 		return input;
-	
-	}
 
-	
+	}
 
 	public void showMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
