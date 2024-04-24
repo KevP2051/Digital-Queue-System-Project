@@ -68,7 +68,7 @@ public class Presenter {
         try {
 
             do {
-                String menu = "Ingrese en numero que corresponda a su tipo de documento \n1. Cédula de ciudadanía\n2. Tarjeta de identidad";
+                String menu = "Ingrese en numero que corresponda a su tipo de documento\n1. Cédula de ciudadanía\n2. Tarjeta de identidad\n3. Salir al menú principal";
                 option = Integer.parseInt(view.readData(menu + "\nDigita la opción a continuación: "));
                 switch (option) {
                     case 1:
@@ -76,6 +76,10 @@ public class Presenter {
                         break;
                     case 2:
                         identificationType = IdentificationType.TARJETA_DE_IDENTIDAD;
+                        break;
+
+                    case 3:
+                        showMainMenu();
                         break;
                     default:
                         view.showMessage("Opción inválida");
@@ -95,33 +99,37 @@ public class Presenter {
     public void showUserMenu() {
         int option = 0;
         String menu = "Bienvenido al sistema de asignación de turnos.  \nEl turno actual es: ";
-       try{
+        try {
 
-      
-        do {
-            String menuAux = "";
-            try {
-                menuAux = menu + digitalQueueSystem.recoverFirstUserInQueue();
-            } catch (EmptyQueueException e) {
-                menuAux = menu + "NINGUNO";
-            }
-            option = Integer
-                    .parseInt(view.readData(menuAux + "\n1. Solicitar turno\nDigita la opción a continuación: "));
-            switch (option) {
-                case 1:
-                    assignWaitingToken();
-                    break;
+            do {
+                String menuAux = "";
+                try {
+                    menuAux = menu + digitalQueueSystem.recoverFirstUserInQueue();
+                } catch (EmptyQueueException e) {
+                    menuAux = menu + "NINGUNO";
+                }
+                option = Integer
+                        .parseInt(view.readData(menuAux
+                                + "\n1. Solicitar turno\n2. Salir al menú principal. \nDigita la opción a continuación: "));
+                switch (option) {
+                    case 1:
+                        assignWaitingToken();
+                        break;
 
-                default:
-                    view.showMessage("Opción inválida");
-                    break;
-            }
-            break;
-        } while (option != 4);
-    }catch(NumberFormatException e){
-        view.showMessage("Número ingresado de forma incorrecta. Asegurate de que éste no tenga espacios, ni puntos, ni viñetas, ni texto adicional. Ej. 1");
-        showUserMenu();
-    }
+                    case 2:
+                        showMainMenu();
+                        break;
+                    default:
+                        view.showMessage("Opción inválida");
+                        break;
+                }
+                break;
+            } while (option != 4);
+        } catch (NumberFormatException e) {
+            view.showMessage(
+                    "Número ingresado de forma incorrecta. Asegurate de que éste no tenga espacios, ni puntos, ni viñetas, ni texto adicional. Ej. 1");
+            showUserMenu();
+        }
     }
 
     public void assignWaitingToken() {
@@ -132,35 +140,36 @@ public class Presenter {
     public void showAdminMenu() {
         int option = 0;
         String menu = "Bienvenido al sistema de asignación de turnos.  \nEl turno actual es: ";
-       try{
-        do {
-            String menuAux = "";
-            try {
-                menuAux = menu + digitalQueueSystem.recoverFirstUserInQueue();
-            } catch (EmptyQueueException e) {
-                menuAux = menu + "NINGUNO";
-            }
-            option = Integer.parseInt(view.readData(menuAux
-                    + "\n1. Pasar al siguiente turno\n2. Reiniciar el numero de turnos\n3. Volver al menu principal \nDigita la opción a continuación: "));
-            switch (option) {
-                case 1:
-                    changeToNextUserInQueue();
-                    break;
-                case 2:
-                    digitalQueueSystem.restartTokenIndex();
-                    break;
-                case 3:
-                    showMainMenu();
-                    break;
-                default:
-                    view.showMessage("Opción inválida");
-                    break;
-            }
-        } while (option != 4);
-    }catch(NumberFormatException e){
-        view.showMessage("Número ingresado de forma incorrecta. Asegurate de que éste no tenga espacios, ni puntos, ni viñetas, ni texto adicional. Ej. 1");
-        showAdminMenu();
-    }
+        try {
+            do {
+                String menuAux = "";
+                try {
+                    menuAux = menu + digitalQueueSystem.recoverFirstUserInQueue();
+                } catch (EmptyQueueException e) {
+                    menuAux = menu + "NINGUNO";
+                }
+                option = Integer.parseInt(view.readData(menuAux
+                        + "\n1. Pasar al siguiente turno\n2. Reiniciar el numero de turnos\n3. Volver al menu principal \nDigita la opción a continuación: "));
+                switch (option) {
+                    case 1:
+                        changeToNextUserInQueue();
+                        break;
+                    case 2:
+                        digitalQueueSystem.restartTokenIndex();
+                        break;
+                    case 3:
+                        showMainMenu();
+                        break;
+                    default:
+                        view.showMessage("Opción inválida");
+                        break;
+                }
+            } while (option != 4);
+        } catch (NumberFormatException e) {
+            view.showMessage(
+                    "Número ingresado de forma incorrecta. Asegurate de que éste no tenga espacios, ni puntos, ni viñetas, ni texto adicional. Ej. 1");
+            showAdminMenu();
+        }
     }
 
     public void changeToNextUserInQueue() {
