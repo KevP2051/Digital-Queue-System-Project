@@ -132,7 +132,7 @@ public class Presenter {
         do {
             String menuAux = "";
             try {
-                menuAux = menu + digitalQueueSystem.recoverFirstUserInQueue().getWaitingToken();
+                menuAux = menu + digitalQueueSystem.recoverFirstUserInQueue();
             } catch (EmptyQueueException e) {
                 menuAux = menu + "NINGUNO";
             }
