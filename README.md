@@ -1,4 +1,4 @@
-# Servicio de grúa de transporte de vehículos.
+# Sistema de turnos digitales.
 ## Descripción
 Este proyecto consiste en un sistema de turnos digitales y su finalidad es analizar el funcionamiento de las colas de la coleccion de java
 ## Pre-requisitos
