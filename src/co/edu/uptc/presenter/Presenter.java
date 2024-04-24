@@ -25,7 +25,7 @@ public class Presenter {
             do {
                 String menu = "Bienvenido al sistema de asignación de turnos. \nIngresa el número correspondiente al tipo de usuario del que haces parte:"
                         +
-                        "\n1. Usuario administrativo. \n2. Usuario normal. ";
+                        "\n1. Usuario administrativo. \n2. Usuario normal. \n3. Salir";
                 option = Integer.parseInt(view.readData(menu + "\nDigita la opción a continuación: "));
                 switch (option) {
                     case 1:
@@ -34,6 +34,10 @@ public class Presenter {
 
                     case 2:
                         showUserMenu();
+                        break;
+
+                    case 3:
+                        System.exit(0);
                         break;
 
                     default:
